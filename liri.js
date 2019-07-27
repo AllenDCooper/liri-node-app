@@ -1,7 +1,10 @@
 require("dotenv").config();
 var fs = require('fs')
 var keys = require("./keys.js");
-// var spotify = new Spotify(keys.spotify);
+var axios = require("axios");
+var moment = require("moment");
+
+var spotify = new Spotify(keys.spotify);
 
 // Make it so liri.js can take in one of the following commands:
 //    * `concert-this`
@@ -39,11 +42,19 @@ switch (command) {
 }
 
 function getConcert (entry) {
-    // Function will display the following
-    // Name of venue
-    // Venue location
-    // Date of the event (use moment to format this as "MM/DD/YYYY")
-    console.log("get concert: " + entry);
+    // Function will display the following name of venue, venue location, and date of event
+    console.log("Get concert: " + entry);
+    // query bands in town API
+    var queryURL = "https://rest.bandsintown.com/artists/" + entry + "/events?app_id=codingbootcamp"
+    // uses axios package to make ajax call
+    axios.get(queryURL).then(function(response) {
+        // loop through array of event responses and print needed data
+        response.data.forEach(function(element) {
+            // Date of the event (use moment to format this as "MM/DD/YYYY")
+            var dateFormatted = moment(element.datetime).format("MM-DD-YYYY");
+            console.log(element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted);
+        })
+    })
 }
 
 
