@@ -1,3 +1,11 @@
+// sample commands this CLI program can run
+    // node liri.js concert-this "Dave Matthews Band"
+    // node liri.js spotify-this-song "Hey Jude"
+    // node liri.js spotify-this-song
+    // node liri.js movie-this "the matrix"
+    // node liri.js movie-this
+    // node liri.js do-what-it-says
+
 require("dotenv").config();
 var fs = require('fs')
 var keys = require("./keys.js");
@@ -24,7 +32,7 @@ function liri (command, entry) {
 
         case "spotify-this-song":
             // API call to Spotify
-            if (entry === true) {
+            if (entry) {
                 getSong(command, entry);
             } else {
                 getSong(command, "The Sign")
@@ -42,7 +50,7 @@ function liri (command, entry) {
         
         case "do-what-it-says":
             // run random.txt
-            getRandom(command, entry);
+            getRandom();
             break;
     }
 };
@@ -56,22 +64,22 @@ function getConcert (command, entry) {
     // uses axios package to make ajax call
     axios.get(queryURL).then(function(response) {
         // assign variable to output total response
-        var totalOutput = command + " " + entry + "\r\n";
+        var concertLog = command + " " + entry + "\r\n";
         // loop through array of event responses and print needed data
         response.data.forEach(function(element) {
             // Date of the event (use moment to format this as "MM/DD/YYYY")
             var dateFormatted = moment(element.datetime).format("MM-DD-YYYY");
             // set variable for storing data element
-            var output = element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted;
-            // print output to terminal
-            console.log(output);
-            // add data element to total output
-            totalOutput += output + "\r\n";
+            var concert = element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted;
+            // print concert to terminal
+            console.log(concert);
+            // add data element to concert log
+            concertLog += concert + "\r\n";
         })
         console.log("\n------------------------------\n");
-        totalOutput += "\r\n"
+        concertLog += "\r\n"
         // print data output to log.txt
-        fs.appendFile("log.txt", totalOutput, function(err) {
+        fs.appendFile("log.txt", concertLog, function(err) {
             if (err) {
                 console.log(err);
             } console.log("log.txt has been updated");
@@ -81,8 +89,10 @@ function getConcert (command, entry) {
 
 function getSong(command, entry) {
     // Function will display the artist(s), song name, preview link of song in Spotify, and album
+    // Print a heading to terminal
     console.log("get song: " + entry);
     console.log("\n--------------------------\n");
+    // use node-spotify-api to run api call
     spotify.search({
         type: "track",
         query: entry
@@ -90,32 +100,32 @@ function getSong(command, entry) {
         if (err) {
             return console.log("Error occurred: " + err)
         }
-        // assign variable to output total response 
-        var totalOutput = command + " " + entry + "\r\n";
+        // initialize variable to store total output of all tracks 
+        var trackLog = command + " " + entry + "\r\n";
         // loop through tracks and return specified elements for each one
         data.tracks.items.forEach(function(element){
-            // console.log(JSON.stringify(element));
+            // initiliaze artists array for storing the various artists on the track
             artists = [];
             // loop through the artists, save them to the artists array, and then convert it to a string
             element.album.artists.forEach(function(element){
                 artists.push(element.name)
                 artists.join(", ")
             })
-            // assign variables for keys
+            // assign variables for object values to be returned
             var previewLink = element.external_urls.spotify;
             var album = element.album.name;
             var song = element.name;
              // set variable for storing data element
-            var output = "Artist(s): " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album
+            var track = "Artist(s): " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album
             // print returned info
-            console.log(output);
-            // add data element to total output
-            totalOutput += output + "\r\n"
+            console.log(track);
+            // add data element to total track
+            trackLog += track + "\r\n"
         })
-        totalOutput += "\r\n"  
+        trackLog += "\r\n"  
         console.log("\n------------------------------\n");
         // write output to log.txt file
-        fs.appendFile("log.txt", totalOutput, function(err) {
+        fs.appendFile("log.txt", trackLog, function(err) {
             if (err) {
                 console.log(err)
             } console.log("log.txt successfully updated");
@@ -126,6 +136,7 @@ function getSong(command, entry) {
 
 function getMovie(command, entry) {
     // Function will display movie info in the terminal
+    // Print a heading to the terminal
     console.log("Get movie: " + entry);
     console.log("\n--------------------------\n");
     // define queryURL
@@ -135,7 +146,7 @@ function getMovie(command, entry) {
     // use axios to run api call
     axios.get(queryURL).then(function(response) {
         // assign variable to output total response 
-        var totalOutput = command + " " + entry + "\r\n";
+        var movieLog = command + " " + entry + "\r\n";
         // assign variables to results
         var title = response.data.Title;
         var year = response.data.Year;
@@ -146,15 +157,15 @@ function getMovie(command, entry) {
         var plot = response.data.Plot;
         var actors = response.data.Actors;
         var x = "\n";
-        var output = "Title: " + title + x + "Year: " + year + x + "IMDB Rating: " + imdbRating + x + "Rotten Tomatoes: " + rtRating + x + 
+        var movie = "Title: " + title + x + "Year: " + year + x + "IMDB Rating: " + imdbRating + x + "Rotten Tomatoes: " + rtRating + x + 
         "Country: " + country + x + "Language: " + language + x + "Plot: " + plot + x + "Actors: " + actors
         // print results
-        console.log(output);
+        console.log(movie);
         console.log("\n--------------------------\n")
-        // add data element to total output
-        totalOutput += output + "\r\n" + "\r\n";
+        // add data element to movieLog
+        movieLog += movie + "\r\n" + "\r\n";
          // write output to log.txt file
-         fs.appendFile("log.txt", totalOutput, function(err) {
+         fs.appendFile("log.txt", movieLog, function(err) {
             if (err) {
                 console.log(err)
             } console.log("log.txt successfully updated");
@@ -162,14 +173,15 @@ function getMovie(command, entry) {
     })
 }
 
-function getRandom(command, entry) {
+function getRandom() {
     fs.readFile("random.txt", "utf-8", function(error, data){
         if (error) {
             console.log(error);
         }
         // split string into two elements (command and entry) to pass into liri function
         var arr = data.split(",")
-
+        console.log(arr[0]);
+        console.log(arr[1]);
         liri(arr[0], arr[1]);
     })
 }
