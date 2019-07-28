@@ -84,10 +84,13 @@ function getSong(command, entry) {
     spotify.search({
         type: "track",
         query: entry
-    }, function(err, data){
+    }, function(err, data) {
         if (err) {
             return console.log("Error occurred: " + err)
-        } 
+        }
+        // assign variable to output total response 
+        var totalOutput = command + " " + entry + "\r\n";
+
         data.tracks.items.forEach(function(element){
             // console.log(JSON.stringify(element));
             artists = [];
@@ -100,9 +103,18 @@ function getSong(command, entry) {
             var previewLink = element.external_urls.spotify;
             var album = element.album.name;
             var song = element.name;
+             // set variable for storing data element
+            var output = "Artist(s): " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album
             // print returned info
-            console.log("Artist(s): " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album);
+            console.log(output);
+            // add data element to total output
+            totalOutput += output + "\r\n";
             })
+        fs.appendFile("log.txt", totalOutput, function(err) {
+            if (err) {
+                console.log(err)
+            } console.log("log.txt successfully updated");
+        })
         console.log("\n------------------------------\n");
     })
 }
