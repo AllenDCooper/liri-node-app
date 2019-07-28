@@ -3,6 +3,7 @@ var fs = require('fs')
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
+var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify(keys.spotify);
 
@@ -27,7 +28,11 @@ switch (command) {
 
     case "spotify-this-song":
         // API call to Spotify
-        getSong(entry);
+        if (entry) {
+            getSong(entry);
+        } else {
+            getSong("The Sign")
+        }
         break;
     
     case "movie-this":
@@ -42,7 +47,7 @@ switch (command) {
 }
 
 function getConcert (entry) {
-    // Function will display the following name of venue, venue location, and date of event
+    // Function will display the name of venue, venue location, and date of event
     console.log("Get concert: " + entry);
     // query bands in town API
     var queryURL = "https://rest.bandsintown.com/artists/" + entry + "/events?app_id=codingbootcamp"
@@ -54,18 +59,37 @@ function getConcert (entry) {
             var dateFormatted = moment(element.datetime).format("MM-DD-YYYY");
             console.log(element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted);
         })
+        console.log("\n------------------------------\n");
     })
 }
 
-
 function getSong(entry) {
-    // Function will display the following in terminal:
-    // Artist(s)
-    // The song's name
-    // A preview link of the song from Spotify
-    // The album that the song is from
-    // If no song is provided then your program will default to "The Sign" by Ace of Base.
+    // Function will display the artist(s), song name, preview link of song in Spotify, and album
     console.log("get song: " + entry);
+    spotify.search({
+        type: "track",
+        query: entry
+    }, function(err, data){
+        if (err) {
+            return console.log("Error occurred: " + err)
+        } 
+        data.tracks.items.forEach(function(element){
+            // console.log(JSON.stringify(element));
+            artists = [];
+            // loop through the artists, save them to the artists array, and then convert it to a string
+            element.album.artists.forEach(function(element){
+                artists.push(element.name)
+                artists.join(", ")
+            })
+            // assign variables for keys
+            var previewLink = element.external_urls.spotify;
+            var album = element.album.name;
+            var song = element.name;
+            // print returned info
+            console.log("Artists: " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album);
+            })
+        console.log("\n------------------------------\n");
+    })
 }
 
 function getMovie(entry) {
