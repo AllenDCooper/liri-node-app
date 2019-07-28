@@ -7,52 +7,49 @@ var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify(keys.spotify);
 
-// Make it so liri.js can take in one of the following commands:
-//    * `concert-this`
-//    * `spotify-this-song`
-//    * `movie-this`
-//    * `do-what-it-says`
-
 // initialize variable for capturing Liri commmand
 var command = process.argv[2];
 
 // initialize variable for capturing user entry (i.e. song title or band name)
 var entry = process.argv[3];
 
-switch (command) {
+function liri (command, entry) {
+    switch (command) {
 
-    case "concert-this":
-        // API call to "Bands In Town"
-        getConcert(entry);
-        break;
+        case "concert-this":
+            // API call to "Bands In Town"
+            getConcert(entry);
+            break;
 
-    case "spotify-this-song":
-        // API call to Spotify
-        if (entry) {
-            getSong(entry);
-        } else {
-            getSong("The Sign")
-        }
-        break;
-    
-    case "movie-this":
-        // API call to OMDB
-        if (entry) {
-            getMovie(entry);
-        } else {
-            getMovie("Mr Nobody");
-        }
-        break;
-    
-    case "do-what-it-says":
-        // API call to Spotify using random.txt
-        getRandomSong();
-        break;
-}
+        case "spotify-this-song":
+            // API call to Spotify
+            if (entry) {
+                getSong(entry);
+            } else {
+                getSong("The Sign")
+            }
+            break;
+        
+        case "movie-this":
+            // API call to OMDB
+            if (entry) {
+                getMovie(entry);
+            } else {
+                getMovie("Mr Nobody");
+            }
+            break;
+        
+        case "do-what-it-says":
+            // run random.txt
+            getRandom();
+            break;
+    }
+};
 
 function getConcert (entry) {
     // Function will display the name of venue, venue location, and date of event
     console.log("Get concert: " + entry);
+    console.log("\n--------------------------\n");
     // query bands in town API
     var queryURL = "https://rest.bandsintown.com/artists/" + entry + "/events?app_id=codingbootcamp"
     // uses axios package to make ajax call
@@ -70,6 +67,7 @@ function getConcert (entry) {
 function getSong(entry) {
     // Function will display the artist(s), song name, preview link of song in Spotify, and album
     console.log("get song: " + entry);
+    console.log("\n--------------------------\n");
     spotify.search({
         type: "track",
         query: entry
@@ -90,7 +88,7 @@ function getSong(entry) {
             var album = element.album.name;
             var song = element.name;
             // print returned info
-            console.log("Artists: " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album);
+            console.log("Artist(s): " + artists + " || " + "Song: " + song + " || " + "Link: " + previewLink + " || " + "Album: " + album);
             })
         console.log("\n------------------------------\n");
     })
@@ -123,6 +121,17 @@ function getMovie(entry) {
     })
 }
 
-function getRandomSong() {
-    console.log("get random song: " + entry)
+function getRandom() {
+    fs.readFile("random.txt", "utf-8", function(error, data){
+        if (error) {
+            console.log(error);
+        }
+        // split string into two elements (command and entry) to pass into liri function
+        var arr = data.split(",")
+
+        liri(arr[0], arr[1]);
+    })
 }
+
+// call liri function
+liri(command, entry);
