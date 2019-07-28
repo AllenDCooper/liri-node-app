@@ -31,19 +31,19 @@ Artist(s): Ty Dolla $ign || Song: Or Nah (feat. The Weeknd, Wiz Khalifa & DJ Mus
 Artist(s): Dreamville,J. Cole || Song: Got Me (with Ari Lennox & Omen feat. Ty Dolla $ign & Dreezy) || Link: https://open.spotify.com/track/4nw0S8MtvcLSpXCS9M8ciL || Album: Revenge Of The Dreamers III
 Artist(s): Jeremih || Song: Impatient || Link: https://open.spotify.com/track/3WjyiSbfR74pjWXQ3IaFKJ || Album: Late Nights: The Album
 Artist(s): Harry Styles || Song: Sign of the Times || Link: https://open.spotify.com/track/5ELRkzdzz0HvGpMDlfZHkV || Album: Sign of the Times
-Artist(s): The Chainsmokers || Song: Do You Mean (with Ty Dolla $ign & bülow) || Link: https://open.spotify.com/track/5uKUdTPzRiHwUlFvMoUdtW || Album: World War Joy
 Artist(s): The Chainsmokers || Song: Do You Mean (with Ty Dolla $ign & bülow) || Link: https://open.spotify.com/track/0ZBP7LB2JvzoaKsBFElGRF || Album: World War Joy...Takeaway
+Artist(s): The Chainsmokers || Song: Do You Mean (with Ty Dolla $ign & bülow) || Link: https://open.spotify.com/track/5uKUdTPzRiHwUlFvMoUdtW || Album: World War Joy
 Artist(s): MihTy,Jeremih,Ty Dolla $ign || Song: The Light || Link: https://open.spotify.com/track/3oCJJksC12uFxkt3RQ7rbV || Album: The Light
 Artist(s): Mac Miller || Song: Cinderella (feat. Ty Dolla $ign) || Link: https://open.spotify.com/track/2lpygKqzPFtItQ4ss3cgfb || Album: The Divine Feminine
 Artist(s): Ty Dolla $ign || Song: Love U Better (feat. Lil Wayne & The-Dream) || Link: https://open.spotify.com/track/270aLuFCbX32hhBr8MQyPM || Album: Beach House 3
 Artist(s): Quality Control || Song: Movin’ Up || Link: https://open.spotify.com/track/7jTL6K5hqWDVUH4j2thZrp || Album: Quality Control: Control The Streets Volume 1
 Artist(s): Rich The Kid || Song: Woah (feat. Miguel & Ty Dolla $ign) || Link: https://open.spotify.com/track/2lAUMDyWq80slJVsrYyD7N || Album: The World Is Yours 2
-Artist(s): Ty Dolla $ign || Song: Droptop in the Rain (feat. Tory Lanez) || Link: https://open.spotify.com/track/2ZN1EnypRwsD38EoFRwmu9 || Album: Beach House 3
+Artist(s): YBN Cordae || Song: Way Back Home (feat. Ty Dolla $ign) || Link: https://open.spotify.com/track/1pHyMdmKAp494PDSZhJHvR || Album: The Lost Boy
 Artist(s): Ronny J,Ty Dolla $ign || Song: Lights Out (feat. Ty Dolla $ign & Rich The Kid) || Link: https://open.spotify.com/track/26LRMtK7JytCxbDAMcexWZ || Album: Lights Out (feat. Ty Dolla $ign & Rich The Kid)
+Artist(s): Ty Dolla $ign || Song: Droptop in the Rain (feat. Tory Lanez) || Link: https://open.spotify.com/track/2ZN1EnypRwsD38EoFRwmu9 || Album: Beach House 3
+Artist(s): YBN Cordae || Song: Way Back Home (feat. Ty Dolla $ign) || Link: https://open.spotify.com/track/3LQUbejniBqSaKJiC3ThcG || Album: The Lost Boy
 Artist(s): Ace of Base || Song: All That She Wants || Link: https://open.spotify.com/track/6kWJvPfC4DgUpRsXKNa9z9 || Album: The Sign (US Album) [Remastered]
 Artist(s): Coldplay || Song: Warning Sign || Link: https://open.spotify.com/track/4bPkBHKLKd9WHizsvM2zV3 || Album: A Rush of Blood to the Head
-Artist(s): Lil Durk || Song: 100 Grand (feat. Ty Dolla $ign & A Boogie wit da Hoodie) || Link: https://open.spotify.com/track/55bBVlWgwZ6yw5ccMkDU5j || Album: Signed To The Streets 3
-Artist(s): Juicy J, Wiz Khalifa & Ty Dolla $ign || Song: Shell Shocked (feat. Kill The Noise & Madsonik) - From "Teenage Mutant Ninja Turtles" || Link: https://open.spotify.com/track/7zBQRGpYImAdIZc97FNj3V || Album: Shell Shocked (feat. Kill The Noise & Madsonik) [From "Teenage Mutant Ninja Turtles"]
 
 movie-this the matrix
 Title: The Matrix
@@ -85,5 +85,5 @@ Artist(s): Manuel Costa || Song: I Want It That Way || Link: https://open.spotif
 Artist(s): Scott Bradlee's Postmodern Jukebox || Song: I Want It That Way || Link: https://open.spotify.com/track/1Le3uYU5NU9cXXtYeSWnEM || Album: Selfies on Kodachrome
 Artist(s): "Weird Al" Yankovic || Song: Ebay (Parody of "I Want It That Way" by the Backstreet Boys) || Link: https://open.spotify.com/track/1vaico2C72imYowF4Kv04V || Album: The Essential "Weird Al" Yankovic
 Artist(s): Yshop || Song: I Want It That Way || Link: https://open.spotify.com/track/0sRt44NXdLVqYeD2TAm1A5 || Album: I Want It That Way
-Artist(s): Love Hits On Piano || Song: I Want It That Way || Link: https://open.spotify.com/track/6o4G9XVj3ikl0W1BNUlH4u || Album: Timeless Love
+Artist(s): Various Artists || Song: I Want It That Way || Link: https://open.spotify.com/track/75W4IDdKhHvRQZpaDx9YPg || Album: NOW That's What I Call 90s Pop
 
