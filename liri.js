@@ -37,7 +37,11 @@ switch (command) {
     
     case "movie-this":
         // API call to OMDB
-        getMovie(entry);
+        if (entry) {
+            getMovie(entry);
+        } else {
+            getMovie("Mr Nobody");
+        }
         break;
     
     case "do-what-it-says":
@@ -93,17 +97,30 @@ function getSong(entry) {
 }
 
 function getMovie(entry) {
-    // Function will display the following in terminal"
-    // Title of the movie.
-    // Year the movie came out.
-    // IMDB Rating of the movie.
-    // Rotten Tomatoes Rating of the movie.
-    // Country where the movie was produced.
-    // Language of the movie.
-    // Plot of the movie.
-    // Actors in the movie.
-    // If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-    console.log("get movie: " + entry);
+    // Function will display movie info in the terminal
+    console.log("Get movie: " + entry);
+    console.log("\n--------------------------\n");
+    // define queryURL
+    var apiKey = "trilogy"
+    var title = entry.replace(" ", "+")
+    var queryURL = "http://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title
+    // use axios to run api call
+    axios.get(queryURL).then(function(response) {
+        // assign variables to results
+        var title = response.data.Title;
+        var year = response.data.Year;
+        var imdbRating = response.data.Ratings[0].Value;
+        var rtRating = response.data.Ratings[1].Value;
+        var country = response.data.Country;
+        var language = response.data.Language;
+        var plot = response.data.Plot;
+        var actors = response.data.Actors;
+        var x = "\n";
+        // print results
+        console.log("Title: " + title + x + "Year: " + year + x + "IMDB Rating: " + imdbRating + x + "Rotten Tomatoes: " + rtRating + x + 
+        "Country: " + country + x + "Language: " + language + x + "Plot: " + plot + x + "Actors: " + actors);
+        console.log("\n--------------------------\n")
+    })
 }
 
 function getRandomSong() {
