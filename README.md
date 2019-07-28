@@ -4,6 +4,7 @@ This is a CLI node app called LIRI (Language Interpretation and Recognition Inte
 
 ## Overview
 liri-node-app takes in parameters and can perform four different commands:
+
 Number | Command | Parameter
 --- | --- | ---
 1 | Find a concert | concert-this "artist name"
