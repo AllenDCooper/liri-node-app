@@ -68,6 +68,7 @@ function getConcert (command, entry) {
             totalOutput += output + "\r\n";
         })
         console.log("\n------------------------------\n");
+        totalOutput += "\r\n"
         // print data output to log.txt
         fs.appendFile("log.txt", totalOutput, function(err) {
             if (err) {
@@ -90,7 +91,7 @@ function getSong(command, entry) {
         }
         // assign variable to output total response 
         var totalOutput = command + " " + entry + "\r\n";
-
+        // loop through tracks and return specified elements for each one
         data.tracks.items.forEach(function(element){
             // console.log(JSON.stringify(element));
             artists = [];
@@ -108,15 +109,18 @@ function getSong(command, entry) {
             // print returned info
             console.log(output);
             // add data element to total output
-            totalOutput += output + "\r\n";
-            })
+            totalOutput += output + "\r\n"
+        })
+        totalOutput += "\r\n"  
+        console.log("\n------------------------------\n");
+        // write output to log.txt file
         fs.appendFile("log.txt", totalOutput, function(err) {
             if (err) {
                 console.log(err)
             } console.log("log.txt successfully updated");
         })
-        console.log("\n------------------------------\n");
     })
+
 }
 
 function getMovie(command, entry) {
@@ -129,6 +133,8 @@ function getMovie(command, entry) {
     var queryURL = "http://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title
     // use axios to run api call
     axios.get(queryURL).then(function(response) {
+        // assign variable to output total response 
+        var totalOutput = command + " " + entry + "\r\n";
         // assign variables to results
         var title = response.data.Title;
         var year = response.data.Year;
@@ -139,10 +145,19 @@ function getMovie(command, entry) {
         var plot = response.data.Plot;
         var actors = response.data.Actors;
         var x = "\n";
+        var output = "Title: " + title + x + "Year: " + year + x + "IMDB Rating: " + imdbRating + x + "Rotten Tomatoes: " + rtRating + x + 
+        "Country: " + country + x + "Language: " + language + x + "Plot: " + plot + x + "Actors: " + actors
         // print results
-        console.log("Title: " + title + x + "Year: " + year + x + "IMDB Rating: " + imdbRating + x + "Rotten Tomatoes: " + rtRating + x + 
-        "Country: " + country + x + "Language: " + language + x + "Plot: " + plot + x + "Actors: " + actors);
+        console.log(output);
         console.log("\n--------------------------\n")
+        // add data element to total output
+        totalOutput += output + "\r\n" + "\r\n";
+         // write output to log.txt file
+         fs.appendFile("log.txt", totalOutput, function(err) {
+            if (err) {
+                console.log(err)
+            } console.log("log.txt successfully updated");
+        })
     })
 }
 
