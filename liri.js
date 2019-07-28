@@ -18,13 +18,13 @@ function liri (command, entry) {
 
         case "concert-this":
             // API call to "Bands In Town"
-            getConcert(entry);
+            getConcert(command, entry);
             break;
 
         case "spotify-this-song":
             // API call to Spotify
             if (entry) {
-                getSong(entry);
+                getSong(command, entry);
             } else {
                 getSong("The Sign")
             }
@@ -33,7 +33,7 @@ function liri (command, entry) {
         case "movie-this":
             // API call to OMDB
             if (entry) {
-                getMovie(entry);
+                getMovie(command, entry);
             } else {
                 getMovie("Mr Nobody");
             }
@@ -41,12 +41,12 @@ function liri (command, entry) {
         
         case "do-what-it-says":
             // run random.txt
-            getRandom();
+            getRandom(command, entry);
             break;
     }
 };
 
-function getConcert (entry) {
+function getConcert (command, entry) {
     // Function will display the name of venue, venue location, and date of event
     console.log("Get concert: " + entry);
     console.log("\n--------------------------\n");
@@ -54,17 +54,30 @@ function getConcert (entry) {
     var queryURL = "https://rest.bandsintown.com/artists/" + entry + "/events?app_id=codingbootcamp"
     // uses axios package to make ajax call
     axios.get(queryURL).then(function(response) {
+        // assign variable to output total response
+        var totalOutput = command + " " + entry + "\r\n";
         // loop through array of event responses and print needed data
         response.data.forEach(function(element) {
             // Date of the event (use moment to format this as "MM/DD/YYYY")
             var dateFormatted = moment(element.datetime).format("MM-DD-YYYY");
-            console.log(element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted);
+            // set variable for storing data element
+            var output = element.venue.name + " || " + element.venue.city + ", " + element.venue.region + " || " + dateFormatted;
+            // print output to terminal
+            console.log(output);
+            // add data element to total output
+            totalOutput += output + "\r\n";
         })
         console.log("\n------------------------------\n");
+        // print data output to log.txt
+        fs.appendFile("log.txt", totalOutput, function(err) {
+            if (err) {
+                console.log(err);
+            } console.log("log.txt has been updated");
+        })
     })
 }
 
-function getSong(entry) {
+function getSong(command, entry) {
     // Function will display the artist(s), song name, preview link of song in Spotify, and album
     console.log("get song: " + entry);
     console.log("\n--------------------------\n");
@@ -94,7 +107,7 @@ function getSong(entry) {
     })
 }
 
-function getMovie(entry) {
+function getMovie(command, entry) {
     // Function will display movie info in the terminal
     console.log("Get movie: " + entry);
     console.log("\n--------------------------\n");
@@ -121,7 +134,7 @@ function getMovie(entry) {
     })
 }
 
-function getRandom() {
+function getRandom(command, entry) {
     fs.readFile("random.txt", "utf-8", function(error, data){
         if (error) {
             console.log(error);
