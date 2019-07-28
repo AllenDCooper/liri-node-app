@@ -11,8 +11,9 @@ var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 
 // initialize variable for capturing user entry (i.e. song title or band name)
-var entry = process.argv[3];
+var entry = process.argv[3]
 
+// liri function to parse user entry and call search functions
 function liri (command, entry) {
     switch (command) {
 
@@ -23,10 +24,10 @@ function liri (command, entry) {
 
         case "spotify-this-song":
             // API call to Spotify
-            if (entry) {
+            if (entry === true) {
                 getSong(command, entry);
             } else {
-                getSong("The Sign")
+                getSong(command, "The Sign")
             }
             break;
         
@@ -35,7 +36,7 @@ function liri (command, entry) {
             if (entry) {
                 getMovie(command, entry);
             } else {
-                getMovie("Mr Nobody");
+                getMovie(command, "Mr Nobody");
             }
             break;
         
