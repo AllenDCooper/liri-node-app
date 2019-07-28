@@ -38,4 +38,8 @@ Notes:
 * getConcert uses moment.js to format date
 
 ## Functionality
-![Screenshot of app](images/screenshot.gif)
+#### GIF Screenshot:
+![Screenshot of app](images/screenshot-cropped.gif)
+
+#### Full Video Walkthrough:
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/DgRyk-UjWno/0.jpg)](http://www.youtube.com/watch?v=DgRyk-UjWno)
